@@ -1,6 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEditor;
 
 public class InventoryItem
 {
@@ -26,12 +27,26 @@ public class Inventory
     private static int inventory_size = 2;
     private InventoryItem[] inventory = new InventoryItem[inventory_size];
 
+    private Scene[] scenes;
+
     public Inventory()
     {
         for (int x = 0; x < inventory_size; x++)
         {
             this.inventory[x] = null;
         }
+
+        this.scenes = new Scene[SceneManager.sceneCountInBuildSettings];
+
+        for (int n = 0; n < EditorBuildSettings.scenes.Length; n++)
+        {
+            if (!string.Equals(EditorBuildSettings.scenes[n].path, ""))
+            {
+                int idx = SceneUtility.GetBuildIndexByScenePath(EditorBuildSettings.scenes[n].path);
+                this.scenes[idx] = SceneManager.GetSceneByBuildIndex(idx);
+            }
+        }
+
     }
 
     private bool IsObjectAlreadyInInventory(GameObject obj)
@@ -68,6 +83,8 @@ public class Inventory
         {
             this.inventory[index] = new InventoryItem(obj, InventoryItem.Location.RIGHT);
         }
+
+        obj.GetComponent<Pickupable>().SetStatus("holding");
     }
 
     public void RemoveGameObjectFromInventory(GameObject obj)
@@ -79,6 +96,8 @@ public class Inventory
                 this.inventory[ind] = null;
             }
         }
+
+        obj.GetComponent<Pickupable>().SetStatus("unused");
     }
 
     public bool IsEmpty()
@@ -184,5 +203,52 @@ public class Inventory
             return 1;
         }
         return -1;
+    }
+
+    public void ChangeItemsRoom(int room)
+    {
+        if (this.inventory[0] != null && this.inventory[0].item != null)
+        {
+            this.inventory[0].item.GetComponent<Pickupable>().ChangeRoom(room);
+        }
+        if (this.inventory[1] != null && this.inventory[1].item != null)
+        {
+            this.inventory[1].item.GetComponent<Pickupable>().ChangeRoom(room);
+        }
+    }
+
+    public int[] NextTargetRoom(int curr)
+    {
+        List<int> targets = new List<int>();
+
+        // if the left and right hand are pairs, get something else
+        // implement pickup!!!
+
+        // get target room in left hand
+        if (this.inventory[0] != null && this.inventory[0].item != null)
+        {
+            targets.Add(this.inventory[0].item.GetComponent<Pickupable>().GetTargetRoom());
+        }
+        // get target room in right hand
+        if (this.inventory[1] != null && this.inventory[1].item != null)
+        {
+            targets.Add(this.inventory[1].item.GetComponent<Pickupable>().GetTargetRoom());
+        }
+
+        if (targets.Count == 0)
+        {
+            Debug.Log("Current room is: " + curr);
+            // add random rooms
+            for (int n = 1; n < this.scenes.Length; n++)
+            {
+                if (n != curr)
+                {
+                    targets.Add(n);
+                    Debug.Log("Added: " + n + " " + this.scenes[n].name);
+                }
+            }
+        }
+
+        return targets.ToArray();
     }
 }

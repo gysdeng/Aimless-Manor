@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311947, g: 0.38074005, b: 0.35872722, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1958,7 +1958,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: e24adfee237dc46d7896fbfeba5202a7, type: 3}
       propertyPath: m_Name
-      value: book
+      value: book_2
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e24adfee237dc46d7896fbfeba5202a7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2059,6 +2059,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbc7e089b77ee4d2abdef4e263fd2ab0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  End_Room: room_bathroom
+  pair: {fileID: 1794525221}
 --- !u!1001 &1294919999
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2785,7 +2787,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: e24adfee237dc46d7896fbfeba5202a7, type: 3}
       propertyPath: m_Name
-      value: book (2)
+      value: book_1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e24adfee237dc46d7896fbfeba5202a7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2886,6 +2888,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbc7e089b77ee4d2abdef4e263fd2ab0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  End_Room: room_bathroom
+  pair: {fileID: 1245810268}
 --- !u!1001 &1798183271
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3021,7 +3025,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: 2b461792718f64fd7980e163191762b7, type: 3}
       propertyPath: m_Name
-      value: teacup_002d (4)
+      value: office_cup
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 2b461792718f64fd7980e163191762b7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3067,6 +3071,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 2b461792718f64fd7980e163191762b7, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0009e3c04eae24c0d8004a9c987692dc, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2b461792718f64fd7980e163191762b7, type: 3}
 --- !u!4 &1827062208 stripped
@@ -3075,6 +3083,55 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1827062207}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1827062209 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 2b461792718f64fd7980e163191762b7,
+    type: 3}
+  m_PrefabInstance: {fileID: 1827062207}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1827062210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1827062209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbc7e089b77ee4d2abdef4e263fd2ab0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  End_Room: room_bathroom
+  pair: {fileID: 0}
+--- !u!54 &1827062211
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1827062209}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &1827062212
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1827062209}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.001329147, y: 0.00065303914, z: 0.0010380064}
+  m_Center: {x: -0.00014557029, y: 0.0003489336, z: 0.0000000088475645}
 --- !u!1001 &1832001307
 PrefabInstance:
   m_ObjectHideFlags: 0

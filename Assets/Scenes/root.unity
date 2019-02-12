@@ -324,6 +324,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_DoorPrefab: {fileID: 5351215811654292585, guid: df8f5131a00d24bb2a3b289c1c2004b0,
     type: 3}
+  player: {fileID: 1989848396}
 --- !u!4 &637798823
 Transform:
   m_ObjectHideFlags: 0

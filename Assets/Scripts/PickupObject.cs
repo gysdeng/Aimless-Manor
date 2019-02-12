@@ -40,11 +40,16 @@ public class PickupObject : MonoBehaviour
         }
 
 		pickup();
-		
+
         //if (Input.GetKeyDown(KeyCode.Q))
         //{
         //    filterThroughInventory();
         //}
+
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            ListRooms();
+        }
     }
 
     void carry(InventoryItem o)
@@ -204,5 +209,28 @@ public class PickupObject : MonoBehaviour
     //        }
     //    }
     //}
+
+    public void ChangeInventoryRoom(int room)
+    {
+        this.inventory.ChangeItemsRoom(room);
+    }
+
+    public int[] GetNextRooms()
+    {
+        return this.inventory.NextTargetRoom(SceneManager.GetSceneAt(SceneManager.sceneCount - 1).buildIndex);
+    }
+
+    void ListRooms()
+    {
+        Debug.Log("-----------");
+
+        for(int i = 0; i < SceneManager.sceneCount; i++)
+        {
+            Scene one = SceneManager.GetSceneAt(i);
+            Debug.Log(i + ": " + one.name + " " + one.buildIndex + " ");
+        }
+
+        Debug.Log("-----------");
+    }
 
 }

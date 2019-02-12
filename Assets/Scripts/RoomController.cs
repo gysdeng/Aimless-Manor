@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEditor;
 
 public class RoomController : MonoBehaviour {
 	RoomScript[] m_RoomList;
@@ -9,26 +9,55 @@ public class RoomController : MonoBehaviour {
     bool m_loadingLevel;
     PortalScript m_sourcePortal;
 
-	void Start () {
+    static System.Random rand;
+    public GameObject player;
+
+    void Start () {
 		m_staticRef = this;
         m_loadingLevel = false;
 
-        LoadRoom(null);
-	}
+        rand = new System.Random();
 
-      public void LoadRoom(PortalScript portal) {
-        int levelIndex;
+        for (int n = 0; n < EditorBuildSettings.scenes.Length; n++)
+        {
+            if (!string.Equals(EditorBuildSettings.scenes[n].path, ""))
+            {
+                
+                int idx = SceneUtility.GetBuildIndexByScenePath(EditorBuildSettings.scenes[n].path);
+                Debug.Log(SceneManager.GetSceneByBuildIndex(idx).name);
+            }
+        }
+
+        LoadRoom(null);
+
+    }
+
+    int levelIndex;
+    public void LoadRoom(PortalScript portal) {
+        
         if(portal == null)
         {
             levelIndex = 1;
         }
         else
         {
-            levelIndex = Random.Range(1, 4);
-            //levelIndex = 2;
+            int[] next_rooms = this.player.GetComponent<PickupObject>().GetNextRooms();
+            int next_index = rand.Next(next_rooms.Length);
+            levelIndex = next_rooms[next_index];
+
+            // need to work on lock in
+            Debug.Log("Possible rooms: " + next_rooms.Length);
+            Debug.Log("Next Room is: " + levelIndex);
         }
 
+        // call Scene Manager to load the selected scene
         SceneManager.LoadScene(levelIndex, LoadSceneMode.Additive);
+
+        //SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(levelIndex));
+        //Debug.Log(SceneManager.GetActiveScene().name);
+
+        // SceneManager.UnloadSceneAsync();
+
         m_loadingLevel = true;
         m_sourcePortal = portal;
       }
