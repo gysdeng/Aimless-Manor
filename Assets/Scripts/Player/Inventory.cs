@@ -62,10 +62,15 @@ public class Inventory
         if (obj.name.Contains("scaled"))
         {
             string smaller = obj.name.Substring(0, obj.name.LastIndexOf("_"));
-            GameObject temp = GameObject.Find(smaller);
-            temp.SetActive(true);
-            obj = temp;
-            GameObject.Find(obj.name).SetActive(false);
+            Debug.Log(smaller);
+
+            GameObject smol = GameObject.Find(smaller);
+            // smol.SetActive(true);
+
+            GameObject big = obj;
+
+            obj = smol;
+            big.SetActive(false);
         }
 
         if (this.IsObjectAlreadyInInventory(obj))
